@@ -1,11 +1,13 @@
+import { Dispatch } from "react"
 import type { Guitar } from "../types"
+import type { CartActions } from "../reducers/cart-reducer"
 
 type GuitarProps = {
   guitar : Guitar, 
-  addToCar: (item: Guitar) => void
+  dispatch: Dispatch<CartActions>
 }
 
-const Guitar = ({guitar, addToCar} : GuitarProps) => {
+const Guitar = ({guitar, dispatch} : GuitarProps) => {
 
   const { name, image, description, price } = guitar
 
@@ -22,7 +24,7 @@ const Guitar = ({guitar, addToCar} : GuitarProps) => {
                 type="button"
                 className="btn btn-dark w-100"
                 //onClick={() => setCart(preCart => [...preCart, guitar])}
-                onClick={() => addToCar(guitar)}
+                onClick={() => dispatch({type: 'add-to-cart', payload: {item: guitar}})}
             >Agregar al Carrito</button>
         </div>
     </div>
